@@ -4,511 +4,272 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dot Learning Path - 최종 보고서</title>
-    <meta
-      name="description"
-      content="Dot Learning Path 최종 보고서: 조사 결과, 제품 설계, 구현 결과, 검증 결과, Git 결과와 남은 항목."
-    />
+    <meta name="description" content="Dot Learning Path 최종 보고서: 조사 결과, 제품 설계, 구현 결과, 검증 결과, Git 결과와 남은 항목." />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <style>
       :root {
         color-scheme: light;
-        --ink: #172026;
-        --muted: #5c6872;
-        --line: #d7dde2;
-        --paper: #fbfaf7;
-        --panel: #ffffff;
-        --brand: #0a6f78;
-        --brand-soft: #d8f0ee;
-        --accent: #c8402f;
-        --accent-soft: #ffe1dc;
-        --gold: #b7791f;
-        --gold-soft: #fff1cf;
-        --green: #23754a;
-        --green-soft: #ddf2e6;
-        --shadow: 0 18px 50px rgba(23, 32, 38, 0.08);
+        --action: #000000;
+        --ink: #222222;
+        --muted: #808080;
+        --line: #d4d4d4;
+        --soft-line: #e8e8e8;
+        --paper: #ffffff;
+        --input: #f2f2f2;
+        --subtle: #fafafa;
+        --orange: #fc5d11;
+        --success: #197a45;
+        --warning: #8a5a00;
+        --radius-sm: 4px;
+        --radius-md: 6px;
+        --radius-lg: 8px;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-12: 48px;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         margin: 0;
         background: var(--paper);
         color: var(--ink);
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          "Noto Sans KR", sans-serif;
-        line-height: 1.68;
+        font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        word-break: keep-all;
       }
-
-      a {
-        color: var(--brand);
-        font-weight: 700;
-        text-decoration-thickness: 0.08em;
-        text-underline-offset: 0.22em;
-      }
+      a { color: inherit; text-underline-offset: 0.2em; }
+      :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 
       .skip-link {
-        position: absolute;
-        left: 1rem;
-        top: 1rem;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 100;
         transform: translateY(-180%);
-        background: var(--ink);
+        padding: 10px 16px;
+        border-radius: var(--radius-md);
+        background: var(--action);
         color: #fff;
-        padding: 0.65rem 0.85rem;
-        border-radius: 6px;
-        z-index: 10;
+        font-weight: 700;
       }
-
-      .skip-link:focus {
-        transform: translateY(0);
-      }
+      .skip-link:focus { transform: translateY(0); }
 
       .site-header {
-        border-bottom: 1px solid var(--line);
-        background: rgba(251, 250, 247, 0.92);
-        backdrop-filter: blur(10px);
         position: sticky;
         top: 0;
-        z-index: 5;
+        z-index: 20;
+        border-bottom: 1px solid var(--soft-line);
+        background: rgba(255,255,255,.96);
+        backdrop-filter: blur(12px);
       }
-
+      .nav,
+      .section-inner,
+      .hero {
+        width: min(1080px, calc(100% - 40px));
+        margin-inline: auto;
+      }
       .nav {
-        width: min(1120px, calc(100% - 2rem));
         min-height: 64px;
-        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
+        gap: var(--space-6);
       }
-
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 0.7rem;
-        color: var(--ink);
-        font-weight: 850;
+        gap: 10px;
         text-decoration: none;
+        font-size: 15px;
+        font-weight: 700;
+        white-space: nowrap;
       }
-
       .brand-mark {
-        width: 34px;
-        height: 34px;
-        border: 2px solid var(--ink);
-        border-radius: 8px;
+        width: 30px;
+        height: 30px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 3px;
         padding: 5px;
-        background: #fff;
+        border: 1px solid var(--action);
+        border-radius: var(--radius-md);
       }
-
-      .brand-mark span {
-        border-radius: 50%;
-        background: var(--brand);
-      }
-
+      .brand-mark span { border-radius: 50%; background: var(--action); }
       .brand-mark span:nth-child(2),
       .brand-mark span:nth-child(6),
-      .brand-mark span:nth-child(8) {
-        background: var(--accent);
-      }
-
-      .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        justify-content: flex-end;
-      }
-
+      .brand-mark span:nth-child(8) { background: var(--orange); }
+      .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 2px; }
       .nav-links a {
-        color: var(--muted);
-        font-size: 0.93rem;
-        font-weight: 750;
-        padding: 0.35rem 0.45rem;
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: var(--radius-sm);
+        color: #555;
         text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
       }
+      .nav-links a:hover { background: var(--input); color: var(--action); }
 
       .hero {
-        width: min(1120px, calc(100% - 2rem));
-        margin: 0 auto;
-        min-height: calc(100vh - 64px);
+        min-height: 620px;
         display: grid;
-        grid-template-columns: minmax(0, 1.16fr) minmax(280px, 0.84fr);
-        gap: clamp(1.6rem, 5vw, 4.5rem);
+        grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
         align-items: center;
-        padding: clamp(2.2rem, 6vw, 4.8rem) 0;
+        gap: clamp(40px, 8vw, 88px);
+        padding-block: clamp(56px, 9vw, 104px);
       }
-
-      .eyebrow {
-        margin: 0 0 0.7rem;
-        color: var(--brand);
-        font-size: 0.86rem;
-        font-weight: 900;
-        letter-spacing: 0;
+      .eyebrow,
+      .section-number {
+        margin: 0 0 var(--space-3);
+        color: var(--orange);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .04em;
         text-transform: uppercase;
       }
-
       h1 {
+        max-width: 760px;
         margin: 0;
-        font-size: clamp(2.35rem, 8vw, 5.8rem);
-        line-height: 0.98;
-        letter-spacing: 0;
+        font-size: clamp(40px, 6.3vw, 72px);
+        line-height: 1.05;
+        letter-spacing: -.045em;
+        font-weight: 760;
       }
-
       .hero-copy {
-        max-width: 720px;
-        margin: 1.25rem 0 0;
-        color: #33414a;
-        font-size: clamp(1.04rem, 2vw, 1.28rem);
+        max-width: 680px;
+        margin: var(--space-6) 0 0;
+        color: #555;
+        font-size: clamp(17px, 2vw, 20px);
+        line-height: 1.6;
       }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.6rem;
-      }
-
+      .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-8); }
       .button {
+        min-height: 48px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 44px;
-        border-radius: 7px;
-        border: 2px solid var(--ink);
-        padding: 0.64rem 0.9rem;
-        background: var(--ink);
+        padding: 0 18px;
+        border: 1px solid var(--action);
+        border-radius: var(--radius-md);
+        background: var(--action);
         color: #fff;
-        font-weight: 850;
         text-decoration: none;
+        font-size: 15px;
+        font-weight: 650;
       }
-
-      .button.secondary {
-        background: transparent;
-        color: var(--ink);
-      }
+      .button:hover { opacity: .84; }
+      .button.secondary { background: #fff; color: var(--action); }
 
       .hero-panel {
-        background: var(--panel);
+        padding: var(--space-6);
         border: 1px solid var(--line);
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-        padding: clamp(1rem, 3vw, 1.45rem);
+        border-radius: var(--radius-md);
+        background: #fff;
       }
-
       .matrix {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
-        gap: clamp(0.28rem, 1vw, 0.5rem);
-        padding: 0.7rem;
-        border: 1px solid var(--line);
-        border-radius: 7px;
-        background:
-          linear-gradient(135deg, rgba(10, 111, 120, 0.08), rgba(200, 64, 47, 0.07)),
-          #fff;
+        gap: clamp(4px, .8vw, 7px);
+        padding: var(--space-4);
+        border-radius: var(--radius-sm);
+        background: var(--input);
       }
+      .pin { aspect-ratio: 1; border-radius: 50%; background: #c8c8c8; }
+      .pin.on { background: var(--action); }
+      .hero-panel dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin: var(--space-6) 0 0; }
+      .hero-panel dl > div { padding: 16px 0; border-top: 1px solid var(--soft-line); }
+      .hero-panel dl > div:nth-child(odd) { padding-right: 16px; }
+      .hero-panel dl > div:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--soft-line); }
+      .hero-panel dt { color: var(--muted); font-size: 13px; font-weight: 500; }
+      .hero-panel dd { margin: 4px 0 0; color: var(--action); font-size: 24px; line-height: 1.2; font-weight: 720; }
 
-      .pin {
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background: #c8d0d6;
-        box-shadow: inset 0 -2px 0 rgba(23, 32, 38, 0.12);
-      }
-
-      .pin.on {
-        background: var(--ink);
-        box-shadow: 0 0 0 3px rgba(10, 111, 120, 0.13);
-      }
-
-      .hero-panel dl {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.7rem;
-        margin: 1rem 0 0;
-      }
-
-      .hero-panel dt {
-        color: var(--muted);
-        font-size: 0.78rem;
-        font-weight: 850;
-      }
-
-      .hero-panel dd {
-        margin: 0.1rem 0 0;
-        font-size: 1.24rem;
-        font-weight: 900;
-      }
-
-      main {
-        padding-bottom: 4rem;
-      }
-
-      .section {
-        border-top: 1px solid var(--line);
-        padding: clamp(2rem, 6vw, 4rem) 0;
-      }
-
-      .section-inner {
-        width: min(1120px, calc(100% - 2rem));
-        margin: 0 auto;
-      }
-
+      main { padding-bottom: 64px; }
+      .section { border-top: 1px solid var(--soft-line); padding: clamp(56px, 8vw, 88px) 0; }
       .section-head {
         display: grid;
-        grid-template-columns: minmax(180px, 0.35fr) minmax(0, 0.65fr);
-        gap: clamp(1rem, 4vw, 3rem);
+        grid-template-columns: minmax(210px, .34fr) minmax(0, .66fr);
+        gap: clamp(24px, 5vw, 64px);
         align-items: start;
-        margin-bottom: 1.4rem;
+        margin-bottom: var(--space-8);
       }
-
-      .section-number {
-        color: var(--accent);
-        font-size: 0.9rem;
-        font-weight: 900;
-      }
-
-      h2 {
-        margin: 0;
-        font-size: clamp(1.55rem, 3.5vw, 2.4rem);
-        line-height: 1.12;
-        letter-spacing: 0;
-      }
-
-      .lead {
-        margin: 0.55rem 0 0;
-        color: var(--muted);
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-      }
-
+      h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.2; letter-spacing: -.025em; font-weight: 720; }
+      .lead { max-width: 650px; margin: 2px 0 0; color: #666; font-size: 16px; line-height: 1.7; }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
       .card {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 1.05rem;
-      }
-
-      .card h3 {
-        margin: 0 0 0.5rem;
-        font-size: 1.08rem;
-        line-height: 1.25;
-        letter-spacing: 0;
-      }
-
-      .card p {
-        margin: 0;
-        color: #394853;
-      }
-
-      .stat-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 0.75rem;
-      }
-
-      .stat {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-        padding: 0.9rem;
-      }
-
-      .stat strong {
-        display: block;
-        font-size: clamp(1.35rem, 3vw, 2.1rem);
-        line-height: 1;
-      }
-
-      .stat span {
-        color: var(--muted);
-        font-size: 0.86rem;
-        font-weight: 750;
-      }
-
-      .callout {
-        margin-top: 1rem;
-        border-left: 5px solid var(--brand);
-        background: var(--brand-soft);
-        border-radius: 0 8px 8px 0;
-        padding: 1rem;
-      }
-
-      .callout.warning {
-        border-left-color: var(--gold);
-        background: var(--gold-soft);
-      }
-
-      .callout p {
-        margin: 0;
-      }
-
-      .tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.55rem;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-      }
-
-      .tag-list li {
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: #fff;
-        min-height: 34px;
-        display: inline-flex;
-        align-items: center;
-        padding: 0.3rem 0.72rem;
-        color: #34434d;
-        font-weight: 800;
-      }
-
-      .timeline {
-        display: grid;
-        gap: 0.85rem;
-      }
-
-      .timeline-item {
-        display: grid;
-        grid-template-columns: 104px minmax(0, 1fr);
-        gap: 1rem;
-        padding: 1rem;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-      }
-
-      .commit {
-        color: var(--accent);
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-        font-weight: 900;
-      }
-
-      .checks {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.75rem;
-      }
-
-      .check {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-        padding: 0.9rem;
-      }
-
-      .check strong {
-        display: block;
-        color: var(--green);
-      }
-
-      .check.limited strong {
-        color: var(--gold);
-      }
-
-      .remaining {
-        columns: 2;
-        column-gap: 2rem;
-        margin: 0;
-        padding-left: 1.2rem;
-      }
-
-      .remaining li {
-        break-inside: avoid;
-        margin: 0 0 0.75rem;
-      }
-
-      .site-footer {
+        padding: 24px 0;
         border-top: 1px solid var(--line);
-        padding: 2rem 0;
-        color: var(--muted);
+        background: transparent;
       }
+      .card h3 { margin: 0 0 10px; font-size: 18px; line-height: 1.4; font-weight: 650; }
+      .card p { margin: 0; color: #555; line-height: 1.72; }
 
-      .site-footer .section-inner {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 1rem;
-      }
+      .stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--action); border-bottom: 1px solid var(--line); }
+      .stat { min-height: 116px; padding: 22px 16px; border-right: 1px solid var(--soft-line); }
+      .stat:first-child { padding-left: 0; }
+      .stat:last-child { border-right: 0; }
+      .stat strong { display: block; color: var(--action); font-size: clamp(28px, 4vw, 40px); line-height: 1; letter-spacing: -.03em; }
+      .stat span { display: block; margin-top: 10px; color: var(--muted); font-size: 14px; }
 
-      code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-        font-size: 0.94em;
-        background: rgba(23, 32, 38, 0.06);
-        border-radius: 5px;
-        padding: 0.08rem 0.26rem;
-      }
+      .tag-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+      .tag-list li { min-height: 42px; display: inline-flex; align-items: center; padding: 9px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 15px; }
+      .callout { margin-top: var(--space-6); padding: 18px 20px; border-left: 3px solid var(--action); background: var(--subtle); }
+      .callout.warning { border-left-color: var(--orange); }
+      .callout p { margin: 0; color: #444; }
+
+      .timeline { border-top: 1px solid var(--action); }
+      .timeline-item { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--soft-line); }
+      .commit { color: var(--orange); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 700; }
+      .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+      .check { min-height: 104px; padding: 20px 0; border-top: 1px solid var(--line); }
+      .check strong { display: block; margin-bottom: 8px; color: var(--success); font-size: 14px; }
+      .check.limited strong { color: var(--warning); }
+      .remaining { columns: 2; column-gap: 56px; margin: 0; padding-left: 20px; }
+      .remaining li { break-inside: avoid; margin: 0 0 14px; padding-left: 4px; }
+      code { padding: 2px 5px; border-radius: var(--radius-sm); background: var(--input); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+
+      .site-footer { border-top: 1px solid var(--soft-line); padding: 28px 0; color: var(--muted); font-size: 14px; }
+      .site-footer .section-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
       @media (max-width: 860px) {
-        .nav {
-          align-items: flex-start;
-          flex-direction: column;
-          padding: 0.85rem 0;
-        }
-
-        .hero,
-        .section-head,
-        .grid,
-        .checks {
-          grid-template-columns: 1fr;
-        }
-
-        .hero {
-          min-height: auto;
-        }
-
-        .stat-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .remaining {
-          columns: 1;
-        }
+        .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+        .nav-links { justify-content: flex-start; }
+        .hero, .section-head, .grid, .checks { grid-template-columns: 1fr; }
+        .hero { min-height: auto; gap: 40px; }
+        .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .stat:nth-child(2) { border-right: 0; }
+        .stat:nth-child(n+3) { border-top: 1px solid var(--soft-line); }
+        .remaining { columns: 1; }
       }
-
       @media (max-width: 520px) {
-        .hero-actions,
-        .button {
-          width: 100%;
-        }
-
-        .hero-panel dl,
-        .stat-grid,
-        .timeline-item {
-          grid-template-columns: 1fr;
-        }
-
-        .nav-links {
-          justify-content: flex-start;
-        }
+        .nav, .section-inner, .hero { width: min(100% - 28px, 1080px); }
+        h1 { font-size: clamp(38px, 13vw, 52px); }
+        .hero-actions, .button { width: 100%; }
+        .hero-panel { padding: 16px; }
+        .hero-panel dl, .timeline-item { grid-template-columns: 1fr; }
+        .hero-panel dl > div:nth-child(even) { padding-left: 0; border-left: 0; }
+        .hero-panel dl > div:nth-child(odd) { padding-right: 0; }
+        .stat-grid { grid-template-columns: 1fr; }
+        .stat { padding-left: 0; border-right: 0; border-top: 1px solid var(--soft-line); }
+        .stat:first-child { border-top: 0; }
       }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     </style>
   </head>
   <body>
     <a class="skip-link" href="#content">본문으로 이동</a>
     <header class="site-header" aria-label="사이트 헤더">
       <nav class="nav" aria-label="주요 이동">
-        <a class="brand" href="#">
-          <span class="brand-mark" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span>
-          </span>
-          <span>Dot Learning Path</span>
-        </a>
-        <div class="nav-links">
-          <a href="#research">조사</a>
-          <a href="#design">설계</a>
-          <a href="#implementation">구현</a>
-          <a href="#verification">검증</a>
-          <a href="#git">Git</a>
-          <a href="#next">남은 항목</a>
-        </div>
+        <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span><span>Dot Learning Path</span></a>
+        <div class="nav-links"><a href="#research">조사</a><a href="#design">설계</a><a href="#implementation">구현</a><a href="#verification">검증</a><a href="#git">Git</a><a href="#next">남은 항목</a></div>
       </nav>
     </header>
 
@@ -517,253 +278,28 @@
         <div>
           <p class="eyebrow">Final Report</p>
           <h1 id="page-title">Dot Learning Path — 최종 보고서</h1>
-          <p class="hero-copy">
-            Dot Pad 기반 촉각 학습 경로를 위해 교육과정 데이터, 접근성 중심 제품 설계,
-            촉각 레슨 구현, 검증 결과와 남은 리스크를 한 페이지에 정리했습니다.
-          </p>
-          <div class="hero-actions">
-            <a class="button" href="#implementation">구현 결과 보기</a>
-            <a class="button secondary" href="#next">남은 항목 확인</a>
-          </div>
+          <p class="hero-copy">Dot Pad 기반 촉각 학습 경로를 위해 교육과정 데이터, 접근성 중심 제품 설계, 촉각 레슨 구현, 검증 결과와 남은 리스크를 한 페이지에 정리했습니다.</p>
+          <div class="hero-actions"><a class="button" href="#implementation">구현 결과 보기</a><a class="button secondary" href="#next">남은 항목 확인</a></div>
         </div>
         <aside class="hero-panel" aria-label="핵심 수치 요약">
-          <div class="matrix" aria-hidden="true">
-            <span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span>
-            <span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span>
-            <span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span>
-            <span class="pin"></span><span class="pin on"></span><span class="pin on"></span><span class="pin"></span>
-            <span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span>
-            <span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span>
-            <span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span>
-            <span class="pin"></span><span class="pin on"></span><span class="pin on"></span><span class="pin"></span>
-            <span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span>
-            <span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span>
-            <span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
-            <span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span>
-          </div>
-          <dl>
-            <div>
-              <dt>주제</dt>
-              <dd>1,956</dd>
-            </div>
-            <div>
-              <dt>클러스터</dt>
-              <dd>153</dd>
-            </div>
-            <div>
-              <dt>선수 관계</dt>
-              <dd>1,894</dd>
-            </div>
-            <div>
-              <dt>촉각 레슨</dt>
-              <dd>8 draft</dd>
-            </div>
-          </dl>
+          <div class="matrix" aria-hidden="true"><span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin on"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span><span class="pin"></span><span class="pin on"></span><span class="pin"></span></div>
+          <dl><div><dt>주제</dt><dd>1,956</dd></div><div><dt>클러스터</dt><dd>153</dd></div><div><dt>선수 관계</dt><dd>1,894</dd></div><div><dt>촉각 레슨</dt><dd>8 draft</dd></div></dl>
         </aside>
       </section>
 
-      <section class="section" id="research" aria-labelledby="research-title">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-number">01</p>
-              <h2 id="research-title">조사 결과</h2>
-            </div>
-            <p class="lead">
-              서비스 베이스와 교육과정 데이터를 분리해 읽고, 기존 기능을 유지하는 조건에서
-              접근성 학습 경로를 얹었습니다.
-            </p>
-          </div>
-          <div class="grid">
-            <article class="card">
-              <h3>서비스 베이스</h3>
-              <p>
-                <code>byeol-coder/dot_lens</code>, HEAD <code>1f98d20</code> 기준입니다.
-                Next.js 15 정적 export 앱이며 프로덕션 <code>basePath=/dot_lens</code>를 사용합니다.
-                핵심 재사용 모듈은 <code>lib/lessonPlayer.ts</code>,
-                <code>lib/tactileScene.ts</code>, <code>lib/dotpadDevice.ts</code>,
-                <code>lib/brailleEngine.ts</code>, 접근성 프로바이더, <code>useLang()</code> i18n입니다.
-                기존 기능과 라우트는 제거하거나 약화하지 않았습니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>교육과정 데이터</h3>
-              <p>
-                <code>DECK6/korean-elementary-learning-map</code>, 커밋 <code>3ef0563...</code>
-                기준입니다. MIT License, NOTICE.md 원저작 표시 요구가 있으며 교육부·NCIC 공식
-                문서가 아닙니다. 주제 1,956개, 클러스터 153개, 선수 관계 1,894개, 성취기준 620개를
-                읽기 전용 외부 데이터로만 취급했습니다.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+      <section class="section" id="research" aria-labelledby="research-title"><div class="section-inner"><div class="section-head"><div><p class="section-number">01</p><h2 id="research-title">조사 결과</h2></div><p class="lead">서비스 베이스와 교육과정 데이터를 분리해 읽고, 기존 기능을 유지하는 조건에서 접근성 학습 경로를 얹었습니다.</p></div><div class="grid"><article class="card"><h3>서비스 베이스</h3><p><code>byeol-coder/dot_lens</code>, HEAD <code>1f98d20</code> 기준입니다. Next.js 15 정적 export 앱이며 프로덕션 <code>basePath=/dot_lens</code>를 사용합니다. 핵심 재사용 모듈은 <code>lib/lessonPlayer.ts</code>, <code>lib/tactileScene.ts</code>, <code>lib/dotpadDevice.ts</code>, <code>lib/brailleEngine.ts</code>, 접근성 프로바이더, <code>useLang()</code> i18n입니다. 기존 기능과 라우트는 제거하거나 약화하지 않았습니다.</p></article><article class="card"><h3>교육과정 데이터</h3><p><code>DECK6/korean-elementary-learning-map</code>, 커밋 <code>3ef0563...</code> 기준입니다. MIT License, NOTICE.md 원저작 표시 요구가 있으며 교육부·NCIC 공식 문서가 아닙니다. 주제 1,956개, 클러스터 153개, 선수 관계 1,894개, 성취기준 620개를 읽기 전용 외부 데이터로만 취급했습니다.</p></article></div></div></section>
 
-      <section class="section" id="design" aria-labelledby="design-title">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-number">02</p>
-              <h2 id="design-title">제품 설계</h2>
-            </div>
-            <p class="lead">
-              짧은 목표, 즉각 피드백, 이어하기, 복습 추천, 부드러운 일일 목표는 차용하고
-              징벌적 장치는 의도적으로 배제했습니다.
-            </p>
-          </div>
-          <ul class="tag-list" aria-label="핵심 설계 원칙">
-            <li>잠금 대신 추천</li>
-            <li>힌트 사용도 완료 인정</li>
-            <li>하트 없음</li>
-            <li>공개 랭킹 없음</li>
-            <li>위협적 연속 학습 문구 없음</li>
-            <li>화면·점자·음성·키보드 동시 지원</li>
-            <li>AI/초안 콘텐츠 draft 표시</li>
-          </ul>
-          <div class="callout">
-            <p>
-              없는 데이터는 정직하게 라벨링했습니다. “촉각 학습 가능”, “텍스트·음성 학습 가능”,
-              “준비 중”, “검수 필요” 상태를 구분하고, 가짜 시작 버튼은 두지 않았습니다.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section class="section" id="design" aria-labelledby="design-title"><div class="section-inner"><div class="section-head"><div><p class="section-number">02</p><h2 id="design-title">제품 설계</h2></div><p class="lead">짧은 목표, 즉각 피드백, 이어하기, 복습 추천, 부드러운 일일 목표는 차용하고 징벌적 장치는 의도적으로 배제했습니다.</p></div><ul class="tag-list" aria-label="핵심 설계 원칙"><li>잠금 대신 추천</li><li>힌트 사용도 완료 인정</li><li>하트 없음</li><li>공개 랭킹 없음</li><li>위협적 연속 학습 문구 없음</li><li>화면·점자·음성·키보드 동시 지원</li><li>AI/초안 콘텐츠 draft 표시</li></ul><div class="callout"><p>없는 데이터는 정직하게 라벨링했습니다. “촉각 학습 가능”, “텍스트·음성 학습 가능”, “준비 중”, “검수 필요” 상태를 구분하고, 가짜 시작 버튼은 두지 않았습니다.</p></div></div></section>
 
-      <section class="section" id="implementation" aria-labelledby="implementation-title">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-number">03</p>
-              <h2 id="implementation-title">구현 결과</h2>
-            </div>
-            <p class="lead">
-              데이터 어댑터, draft 촉각 레슨 8종, 학생 홈·경로·레슨 화면을 구현했습니다.
-            </p>
-          </div>
-          <div class="stat-grid" aria-label="구현 요약 수치">
-            <div class="stat"><strong>8</strong><span>촉각 레슨</span></div>
-            <div class="stat"><strong>60x40</strong><span>촉각 매트릭스</span></div>
-            <div class="stat"><strong>3</strong><span>학습 화면</span></div>
-            <div class="stat"><strong>0</strong><span>기존 라우트 제거</span></div>
-          </div>
-          <div class="grid" style="margin-top: 1rem">
-            <article class="card">
-              <h3>데이터 어댑터 계층</h3>
-              <p>
-                <code>lib/curriculum/</code> 아래에서 <code>buildCurriculum.mjs</code>가 고정 SHA에서만
-                스냅샷을 생성합니다. 다른 커밋이면 중단하고, sha256 해시와 출처 문구를 manifest에
-                기록하며, <code>public/curriculum/</code>에 커밋해 오프라인 빌드를 보장합니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>촉각 레슨 8종</h3>
-              <p>
-                수 크기 비교, 수직선 덧셈, 여러 가지 삼각형, 여러 가지 사각형, 식물의 부분,
-                물의 세 가지 모습, 달의 모양 변화, 지도의 방위를 손으로 설계한 60x40 매트릭스와
-                이중언어 설명·힌트·퀴즈로 구성했습니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>학습 화면</h3>
-              <p>
-                <code>/learn/home</code>, <code>/learn</code>, <code>/learn/lesson/[id]</code>를 추가했습니다.
-                키보드, 화면 버튼, 패닝키가 하나의 상태 머신을 구동하고 점자 라인, TTS, 기기 미러링,
-                시뮬레이션 경로를 제공합니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>접근성 상태 표현</h3>
-              <p>
-                Esc 음성 중지, 이어하기 복원, 결과 화면의 “배운 내용 먼저·점수 나중” 구조,
-                색상 단독이 아닌 모양과 텍스트 기반 상태 표시를 반영했습니다.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+      <section class="section" id="implementation" aria-labelledby="implementation-title"><div class="section-inner"><div class="section-head"><div><p class="section-number">03</p><h2 id="implementation-title">구현 결과</h2></div><p class="lead">데이터 어댑터, draft 촉각 레슨 8종, 학생 홈·경로·레슨 화면을 구현했습니다.</p></div><div class="stat-grid" aria-label="구현 요약 수치"><div class="stat"><strong>8</strong><span>촉각 레슨</span></div><div class="stat"><strong>60x40</strong><span>촉각 매트릭스</span></div><div class="stat"><strong>3</strong><span>학습 화면</span></div><div class="stat"><strong>0</strong><span>기존 라우트 제거</span></div></div><div class="grid" style="margin-top:24px"><article class="card"><h3>데이터 어댑터 계층</h3><p><code>lib/curriculum/</code> 아래에서 <code>buildCurriculum.mjs</code>가 고정 SHA에서만 스냅샷을 생성합니다. 다른 커밋이면 중단하고, sha256 해시와 출처 문구를 manifest에 기록하며, <code>public/curriculum/</code>에 커밋해 오프라인 빌드를 보장합니다.</p></article><article class="card"><h3>촉각 레슨 8종</h3><p>수 크기 비교, 수직선 덧셈, 여러 가지 삼각형, 여러 가지 사각형, 식물의 부분, 물의 세 가지 모습, 달의 모양 변화, 지도의 방위를 손으로 설계한 60x40 매트릭스와 이중언어 설명·힌트·퀴즈로 구성했습니다.</p></article><article class="card"><h3>학습 화면</h3><p><code>/learn/home</code>, <code>/learn</code>, <code>/learn/lesson/[id]</code>를 추가했습니다. 키보드, 화면 버튼, 패닝키가 하나의 상태 머신을 구동하고 점자 라인, TTS, 기기 미러링, 시뮬레이션 경로를 제공합니다.</p></article><article class="card"><h3>접근성 상태 표현</h3><p>Esc 음성 중지, 이어하기 복원, 결과 화면의 “배운 내용 먼저·점수 나중” 구조, 색상 단독이 아닌 모양과 텍스트 기반 상태 표시를 반영했습니다.</p></article></div></div></section>
 
-      <section class="section" id="verification" aria-labelledby="verification-title">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-number">04</p>
-              <h2 id="verification-title">검증 결과</h2>
-            </div>
-            <p class="lead">
-              타입체크, 데이터 검증, 단위 테스트, 정적 export 빌드를 통과했습니다.
-            </p>
-          </div>
-          <div class="checks">
-            <div class="check"><strong>통과</strong><code>tsc --noEmit</code></div>
-            <div class="check"><strong>OK</strong><code>curriculum:validate</code> 1956 주제 / 153 클러스터 / 1894 엣지</div>
-            <div class="check"><strong>18/18 통과</strong><code>npm test</code></div>
-            <div class="check"><strong>성공</strong><code>next build</code> 정적 export</div>
-            <div class="check limited"><strong>미실행</strong>Playwright 브라우저 CDN 차단으로 Chromium 설치 실패</div>
-            <div class="check limited"><strong>미검증</strong>실기기 Dot Pad 핀 출력 검수는 기기 부재로 제외</div>
-          </div>
-          <div class="callout warning">
-            <p>
-              Playwright 뷰포트 QA 대신 타입체크, 테스트, 빌드, export 산출물 검사를 수행했습니다.
-              실제 기기 검증은 <code>deviceShow</code> 미러링 경로의 코드 확인까지만 완료했습니다.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section class="section" id="verification" aria-labelledby="verification-title"><div class="section-inner"><div class="section-head"><div><p class="section-number">04</p><h2 id="verification-title">검증 결과</h2></div><p class="lead">타입체크, 데이터 검증, 단위 테스트, 정적 export 빌드를 통과했습니다.</p></div><div class="checks"><div class="check"><strong>통과</strong><code>tsc --noEmit</code></div><div class="check"><strong>OK</strong><code>curriculum:validate</code> 1956 주제 / 153 클러스터 / 1894 엣지</div><div class="check"><strong>18/18 통과</strong><code>npm test</code></div><div class="check"><strong>성공</strong><code>next build</code> 정적 export</div><div class="check limited"><strong>미실행</strong>Playwright 브라우저 CDN 차단으로 Chromium 설치 실패</div><div class="check limited"><strong>미검증</strong>실기기 Dot Pad 핀 출력 검수는 기기 부재로 제외</div></div><div class="callout warning"><p>Playwright 뷰포트 QA 대신 타입체크, 테스트, 빌드, export 산출물 검사를 수행했습니다. 실제 기기 검증은 <code>deviceShow</code> 미러링 경로의 코드 확인까지만 완료했습니다.</p></div></div></section>
 
-      <section class="section" id="git" aria-labelledby="git-title">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-number">05</p>
-              <h2 id="git-title">Git 결과</h2>
-            </div>
-            <p class="lead">
-              작업 브랜치는 <code>feat/accessible-elementary-learning-path</code>이며,
-              base는 <code>main @ 1f98d20</code>입니다.
-            </p>
-          </div>
-          <div class="timeline" aria-label="커밋 목록">
-            <div class="timeline-item"><span class="commit">1641285</span><span>feat(curriculum): 데이터 어댑터 + 고정 스냅샷</span></div>
-            <div class="timeline-item"><span class="commit">65e8ef6</span><span>feat(lesson): 촉각 레슨 8종 + 변환 + 진도 저장소</span></div>
-            <div class="timeline-item"><span class="commit">ed4cf81</span><span>feat(path): 학생 홈·경로·레슨 화면</span></div>
-            <div class="timeline-item"><span class="commit">2099045</span><span>test(learning): 데이터·플레이어 단위 테스트</span></div>
-          </div>
-          <div class="callout">
-            <p>
-              DECK6 upstream에는 푸시하지 않았고 읽기 전용으로만 사용했습니다. origin에는
-              <code>git push -u origin feat/accessible-elementary-learning-path</code>로 올리면 됩니다.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section class="section" id="git" aria-labelledby="git-title"><div class="section-inner"><div class="section-head"><div><p class="section-number">05</p><h2 id="git-title">Git 결과</h2></div><p class="lead">작업 브랜치는 <code>feat/accessible-elementary-learning-path</code>이며, base는 <code>main @ 1f98d20</code>입니다.</p></div><div class="timeline" aria-label="커밋 목록"><div class="timeline-item"><span class="commit">1641285</span><span>feat(curriculum): 데이터 어댑터 + 고정 스냅샷</span></div><div class="timeline-item"><span class="commit">65e8ef6</span><span>feat(lesson): 촉각 레슨 8종 + 변환 + 진도 저장소</span></div><div class="timeline-item"><span class="commit">ed4cf81</span><span>feat(path): 학생 홈·경로·레슨 화면</span></div><div class="timeline-item"><span class="commit">2099045</span><span>test(learning): 데이터·플레이어 단위 테스트</span></div></div><div class="callout"><p>DECK6 upstream에는 푸시하지 않았고 읽기 전용으로만 사용했습니다. origin에는 <code>git push -u origin feat/accessible-elementary-learning-path</code>로 올리면 됩니다.</p></div></div></section>
 
-      <section class="section" id="next" aria-labelledby="next-title">
-        <div class="section-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-number">06</p>
-              <h2 id="next-title">남은 항목</h2>
-            </div>
-            <p class="lead">
-              draft 레슨을 published로 승격하려면 전문가 검수와 실사용 검증이 필요합니다.
-            </p>
-          </div>
-          <ul class="remaining">
-            <li>특수교사·한글/수학 점자·촉각 단순화·교육과정 정합성 전문가 검수</li>
-            <li>실제 학생 사용성 평가</li>
-            <li>실기기 Dot Pad 핀 출력 검수: BLE 연결과 프레임 정확도 확인</li>
-            <li>Playwright 뷰포트 QA: 200%/400% 확대, 고대비, 44px 타깃 확인</li>
-            <li>촉각 레슨 전체 주제 확대: 현재 1,956개 중 8개 구현</li>
-          </ul>
-        </div>
-      </section>
+      <section class="section" id="next" aria-labelledby="next-title"><div class="section-inner"><div class="section-head"><div><p class="section-number">06</p><h2 id="next-title">남은 항목</h2></div><p class="lead">draft 레슨을 published로 승격하려면 전문가 검수와 실사용 검증이 필요합니다.</p></div><ul class="remaining"><li>특수교사·한글/수학 점자·촉각 단순화·교육과정 정합성 전문가 검수</li><li>실제 학생 사용성 평가</li><li>실기기 Dot Pad 핀 출력 검수: BLE 연결과 프레임 정확도 확인</li><li>Playwright 뷰포트 QA: 200%/400% 확대, 고대비, 44px 타깃 확인</li><li>촉각 레슨 전체 주제 확대: 현재 1,956개 중 8개 구현</li></ul></div></section>
     </main>
 
-    <footer class="site-footer">
-      <div class="section-inner">
-        <span>Dot Learning Path — 최종 보고서</span>
-        <span>Prepared for byeol-coder.github.io</span>
-      </div>
-    </footer>
+    <footer class="site-footer"><div class="section-inner"><span>Dot Learning Path — 최종 보고서</span><span>Prepared for byeol-coder.github.io</span></div></footer>
   </body>
 </html>
